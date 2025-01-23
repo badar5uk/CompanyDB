@@ -61,4 +61,36 @@ FROM departments d WHERE department_id in (SELECT department_id from projects p
 Where budget > 2000))
 GROUP BY e.name,e.department_id;
 
+/*
+List the names of employees who work in departments located in 'amerat'.
+*/
+SELECT e.name, e.department_id
+FROM employees e 
+Where e.department_id in ( SELECT d.department_id from departments d where d.location = 'amerat')
 
+/*
+Identify employees who earn more than the average salary across all departments.
+*/
+
+select employee_id, Salary, department_id 
+FROM employees 
+WHERE salary > (SELECT AVG(salary) FROM employees)
+GROUP BY employee_id, Salary, department_id;
+
+/*
+Retrieve the name of the department that manages the project with the highest budget.
+*/
+
+SELECT d.department_name
+FROM departments d
+Where d.department_id in (SELECT p.department_id FROM projects p
+WHERE p.budget in (SELECT MAX(budget) FROM projects ))
+GROUP BY department_name;
+
+/*
+Display the department ID and the total number of employees in each department.
+*/
+
+SELECT department_id, COUNT(*) as 'Total Employees'
+FROM employees
+GROUP BY department_id;
