@@ -38,15 +38,27 @@ GROUP BY y.department_id
 /*
 Names and salaries of highest paid in each department
 */
-SELECT name, department_id, Salary
-FROM employees
-GROUP BY Salary, department_id, name
-Having Salary = MAX(Salary)
+SELECT e.name, e.department_id, e.Salary
+FROM employees e
+where e.Salary = (SELECT MAX(Salary) from employees where department_id = e.department_id )
 ;
 
 /*
 Projects with budgets that exceed the total salaries of all employees in their respective departments.
 */
+SELECT project_name,budget
+FROM projects
+Where budget > (SELECT SUM(Salary) FROM employees);
 
-Group By
+/*
+Names of employees working in departments that manage projects with a budget greater than $2000.
+*/
+
+SELECT e.name, e.department_id FROM
+employees e
+WHERE e.department_id in (SELECT d.department_id
+FROM departments d WHERE department_id in (SELECT department_id from projects p
+Where budget > 2000))
+GROUP BY e.name,e.department_id;
+
 
