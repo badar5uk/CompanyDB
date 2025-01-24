@@ -12,21 +12,15 @@ select name  FROM employees Where department_id = '2'
 /*
 Find employees whose salaries are greater than the average salary of their respective department.
 */
+
 SELECT *
 FROM employees g1
-WHERE g1.salary > (select avg(g2.salary) from employees g2 where g2.department_id = g1.department_id)
-group by g1.department_id;
+WHERE g1.salary >= (select avg(g2.salary) as Average from employees g2 
+where g2.department_id = g1.department_id);
 
-SELECT e.name, e.Salary, e.department_id
-FROM employees e
-WHERE e.Salary > (
-    SELECT AVG(Salary)
-    FROM employees sub
-    WHERE sub.department_id = e.department_id
-) OR e.department_id NOT IN (
-    SELECT DISTINCT department_id
-    FROM employees
-);
+select * from employees e, 
+(select g2.department_id, avg(g2.salary) as AVG from employees g2 group by g2.department_id) x2 
+Where e.department_id = x2.department_id AND e.Salary >= AVG
 
 /*
 Employees with no dpeartments
