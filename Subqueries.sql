@@ -31,7 +31,10 @@ SELECT * FROM employees WHERE department_id = null;
 /*
 Find departments with no pojects
 */
-SELECT project_name from projects WHERE department_id = null;
+
+SELECT *
+FROM departments d WHERE d.department_id in 
+(SELECT department_id FROM projects p WHERE p.department_id = null);
 
 /*
 Department with highest number of employees
