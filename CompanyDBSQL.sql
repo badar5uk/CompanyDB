@@ -53,7 +53,6 @@ Values
 ('audit finance records','3','2000'),
 ('Hire new employees','1','10000');
 
-
-
+INSERT INTO departments
 
 

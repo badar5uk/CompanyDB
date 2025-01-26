@@ -155,3 +155,33 @@ FROM employees
 WHERE hire_date in (SELECT max(hire_date) FROM employees)
 
 
+SELECT *
+FROM projects p, departments d
+WHERE p.department_id = d.department_id;
+
+SELECT *
+FROM projects p
+LEFT JOIN departments d
+ON p.department_id = d.department_id;
+
+Insert Into projects(project_name, budget)
+Values
+('SAMPLE','300'),
+('NEW project','500')
+
+SELECT d.department_name as Department_Name , p.project_name as Project_Name
+FROM departments d
+INNER JOIN projects p
+ON d.department_id = p.department_id
+
+SELECT e1.name as Employee_name, e2.name as Colleauge_Name
+FROM employees e1
+INNER JOIN employees e2
+ON e1.department_id =e2.department_id
+WHERE e1.hire_date > e2.hire_date
+
+SELECT *
+FROM projects p1
+INNER JOIN projects p2
+ON p1.department_id = p2.department_id
+WHERE p1.budget > p2.budget
