@@ -25,15 +25,11 @@ ON d.department_id = e.department_id
 Find Total Budget Managed by Each Employee’s Department
 Write a query to calculate the total budget of projects managed by each department and list the department name, location, and the employees working in it.
 */
-
-SELECT e.name, p.project_name, d.department_name, d.location,
-(SELECT SUM(budget) FROM projects psum) as SUM
-FROM employees e
+SELECT p.project_name, d.department_name, d.location, SUM(p.budget) as Total_budget
+FROM departments d
 INNER JOIN projects p
-ON e.department_id = p.project_id
-INNER JOIN departments d
-ON d.department_id = e.department_id;
-
+ON d.department_id = p.department_id
+GROUP BY p.project_name, d.department_name, d.location
 
 /*
 Identify Departments With More Than 2 Employees
