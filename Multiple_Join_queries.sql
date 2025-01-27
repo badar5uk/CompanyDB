@@ -6,11 +6,10 @@ Find all departments and their projects along with the employees working in each
 
 SELECT *
 FROM departments d
-INNER JOIN employees e
+LEFT JOIN employees e
 ON d.department_id = e.department_id
 LEFT JOIN projects p
 ON p.department_id = d.department_id
-
 
 /*
 Retrieve a list of employees who are part of departments that have projects assigned. Include employees from departments with no projects.
@@ -29,7 +28,7 @@ List all departments and the number of employees in each department. Include dep
 
 SELECT  d.department_name ,COUNT(e.employee_id) as 'Total Employees'
 FROM employees e
-INNER JOIN departments d
+RIGHT JOIN departments d
 ON e.department_id = d.department_id 
 GROUP BY d.department_name
 /*
@@ -87,8 +86,6 @@ SELECT p.* , d.department_name
 FROM projects p
 LEFT JOIN departments d
 ON p.department_id = d.department_id
-
-
 
 /*
 Find all employees along with their department names. Include employees without a department.
