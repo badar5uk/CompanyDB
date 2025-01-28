@@ -83,7 +83,7 @@ Find all employees along with their department names and the projects they are w
 */
 SELECT e.* , d.department_name, p.project_name
 FROM employees e
-RIGHT JOIN departments d
+LEFT JOIN departments d
 ON d.department_id = e.department_id
 LEFT JOIN projects p
 ON p.department_id = d.department_id
